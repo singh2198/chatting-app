@@ -9,7 +9,7 @@ const { ObjectId } = mongoose.Types;
 
 
 
-const port = 4000;
+const port = process.env.BACKEND_URL;
 const cors = require('cors');
 const { generateToken, verifyToken } = require('./auth');
 
@@ -21,7 +21,7 @@ const server = http.createServer(app);
 
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'https://chatting-app-hf1dnbqxh-singh2198s-projects.vercel.app/',
   methods: ['GET', 'POST','DELETE','PUT'],
   allowedHeaders: ['Content-Type'],
 }));
@@ -29,7 +29,7 @@ app.use(cors({
 app.use(express.json());
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:3000',  
+    origin: 'https://chatting-app-hf1dnbqxh-singh2198s-projects.vercel.app/',  
     methods: ['GET', 'POST','DELETE','PUT'],
   },
 });
