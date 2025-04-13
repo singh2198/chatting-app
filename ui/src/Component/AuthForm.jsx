@@ -112,7 +112,7 @@ function AuthForm() {
       return;
     }
   
-    const url = isLogin ? 'http://localhost:4000/login' : 'http://localhost:4000/singup';
+    const url = isLogin ? 'http://https://chatting-app-sooty.vercel.app/login' : 'http://https://chatting-app-sooty.vercel.app/singup';
     const data = isLogin ? { email, password } : { name, email, password };
   
     try {

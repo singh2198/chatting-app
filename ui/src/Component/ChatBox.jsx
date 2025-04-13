@@ -123,7 +123,7 @@ const ChatBox = ({ selectedProfileId,selectedProfilename}) => {
         if (login_singupId && selectedProfileId) {
             dispatch(fetchMessages(login_singupId, selectedProfileId));
         }
-        const newSocket = io("http://localhost:4000");
+        const newSocket = io("http://https://chatting-app-sooty.vercel.app");
         setSocket(newSocket);
     
         const handleReceiveMessage = (data) => {

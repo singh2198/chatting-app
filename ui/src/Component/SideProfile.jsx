@@ -51,7 +51,7 @@ const SideProfile = () => {
     const [selectedProfileId, setSelectedProfileId] = useState(null); 
     const [selectedProfilename, setSelectedProfilename] = useState([]);
     const dispatch = useDispatch();
-    const url="http://localhost:4000"
+    const url="http://https://chatting-app-sooty.vercel.app"
 
 
     const location =useLocation();

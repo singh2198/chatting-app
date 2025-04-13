@@ -27,7 +27,7 @@ const Register = () => {
         }
 
         try{
-            const response=await fetch('http://localhost:4000/Register',{
+            const response=await fetch('http://https://chatting-app-sooty.vercel.app/Register',{
                 method:"POST",
                 headers:{
                     'Content-Type': 'application/json',

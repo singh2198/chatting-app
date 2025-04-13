@@ -11,7 +11,7 @@ import {
 
 } from "./actiontype";
 
-const url = "http://localhost:4000/";
+const url = "http://https://chatting-app-sooty.vercel.app/";
 
 
 
