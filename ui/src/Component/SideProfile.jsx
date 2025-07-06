@@ -52,7 +52,8 @@ const SideProfile = () => {
     const [selectedProfilename, setSelectedProfilename] = useState([]);
     const dispatch = useDispatch();
     // Backend url
-    const url='http://localhost:3032';
+    // const url='http://localhost:3032';
+    const url =process.env.BACKEDN_URL
     
     const location =useLocation();
     const params = new URLSearchParams(location.search);

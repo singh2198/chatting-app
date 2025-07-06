@@ -8,7 +8,8 @@ const Register = () => {
     const [userId, setUserId] = useState(null);
     const navigate = useNavigate();
     const userObject=[];
-    const url=""
+    // const url=""
+    const url =process.env.BACKEDN_URL
 
     
     const generateRandomId = () => Math.floor(Math.random() * 100000);

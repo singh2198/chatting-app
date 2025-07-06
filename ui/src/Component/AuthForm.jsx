@@ -98,7 +98,8 @@ function AuthForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  let  url ="http://localhost:3032"
+  // let  url ="http://localhost:3032"
+  const url =process.env.BACKEDN_URL
 
   const handleAuth = async (e) => {
     e.preventDefault();

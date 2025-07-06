@@ -100,7 +100,8 @@ function AddUser() {
   const name = params.get('name');
   const email = params.get('email');
   const singupobject_id=params.get('_id');
-  const url = "http://localhost:3032"
+  // const url = "http://localhost:3032"
+  const url =process.env.BACKEDN_URL
 
   useEffect(() => {
     fetchUsers();

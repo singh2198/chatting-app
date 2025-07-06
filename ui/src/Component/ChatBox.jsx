@@ -112,7 +112,8 @@ const ChatBox = ({ selectedProfileId,selectedProfilename}) => {
     const login_singupId = params.get("_id");
     const { messages } = useSelector((state) => state.reduxStore);
 
-    const url="http://localhost:3032"
+    // const url="http://localhost:3032"
+    const url =process.env.BACKEDN_URL
 
     useEffect(() => {
         const generateRoomId = (id1, id2) => {
