@@ -53,7 +53,7 @@ const SideProfile = () => {
     const dispatch = useDispatch();
     // Backend url
     // const url='http://localhost:3032';
-    const url =process.env.BACKEDN_URL
+    const url = process.env.REACT_APP_BACKEND_URL || "http://localhost:3032"
     
     const location =useLocation();
     const params = new URLSearchParams(location.search);
