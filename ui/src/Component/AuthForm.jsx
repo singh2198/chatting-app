@@ -98,6 +98,7 @@ function AuthForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  let  url ="http://localhost:3032"
 
   const handleAuth = async (e) => {
     e.preventDefault();
@@ -112,7 +113,7 @@ function AuthForm() {
       return;
     }
   
-    const url = isLogin ? 'http://https://chatting-app-sooty.vercel.app/login' : 'http://https://chatting-app-sooty.vercel.app/singup';
+     url = isLogin ? `${url}/login` : `${url}/singup`;
     const data = isLogin ? { email, password } : { name, email, password };
   
     try {

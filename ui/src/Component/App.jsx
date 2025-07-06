@@ -11,7 +11,7 @@ const App=()=>{
 
     return(
         <>
-        <div style={{display:'flex',flexDirection:'row'}}>
+        <div style={{display:'flex',flexDirection:'row',height:'100vh'}}>
             <Navbar/>
             
         </div>

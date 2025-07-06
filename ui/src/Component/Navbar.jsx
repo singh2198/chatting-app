@@ -14,14 +14,11 @@ const  Navbar=()=> {
         console.log(drawer)
     }
 
-    
-
-
     return (
         <>
 
             <div className="sidNav" >
-                                <SideProfile/>
+                <SideProfile/>
             </div>
             
         </>

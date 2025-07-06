@@ -6,6 +6,9 @@ import App from './App.js';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from "react-redux";
 import { store } from './redux/store.js';
+import { Buffer } from 'buffer';
+window.Buffer = Buffer;
+
 
  
 const root = ReactDOM.createRoot(document.getElementById('root'));

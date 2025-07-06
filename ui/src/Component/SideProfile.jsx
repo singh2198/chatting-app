@@ -12,7 +12,7 @@ const SideProfileContainer = styled.div`
   width: 250px;
   background-color: #f0f0f0;
   border-right: 1px solid #ccc;
-  height: 100vh;
+  height: 100%
   overflow-y: auto;
 `;
 
@@ -51,9 +51,9 @@ const SideProfile = () => {
     const [selectedProfileId, setSelectedProfileId] = useState(null); 
     const [selectedProfilename, setSelectedProfilename] = useState([]);
     const dispatch = useDispatch();
-    const url="http://https://chatting-app-sooty.vercel.app"
-
-
+    // Backend url
+    const url='http://localhost:3032';
+    
     const location =useLocation();
     const params = new URLSearchParams(location.search);
     const singup_id = params.get('singup_id');

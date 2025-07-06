@@ -7,21 +7,16 @@ const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Types;
 
-
-
-const port = process.env.BACKEND_URL;
+// Fix port configuration
+const port = 3032;
 const cors = require('cors');
 const { generateToken, verifyToken } = require('./auth');
-
 
 const app = express();
 const server = http.createServer(app);
 
-
-
-
 app.use(cors({
-  origin: 'https://chatting-app-hf1dnbqxh-singh2198s-projects.vercel.app/',
+  origin: "http://localhost:3000",
   methods: ['GET', 'POST','DELETE','PUT'],
   allowedHeaders: ['Content-Type'],
 }));
@@ -29,13 +24,17 @@ app.use(cors({
 app.use(express.json());
 const io = new Server(server, {
   cors: {
-    origin: 'https://chatting-app-hf1dnbqxh-singh2198s-projects.vercel.app/',  
+    origin: 'http://localhost:3000',  
     methods: ['GET', 'POST','DELETE','PUT'],
   },
 });
 
-
 connectDB();
+
+// Basic test route
+app.get('/', (req, res) => {
+  res.json({ message: 'Chatting App Backend is running!' });
+});
 
 app.post('/Register',async(req,res)=>{
   console.log(req.body);
@@ -77,7 +76,6 @@ app.post('/singup',async (req,res)=>{
     console.error('Error registering user:', error);
     res.status(500).json({ message: 'Failed to register user' });
   }
-
 
 });
 
@@ -164,7 +162,7 @@ app.get('/getusers',async(req,res)=>{
     res.status(200).json(users);
   } catch (error) {
     console.error('Error fetching users:', error);
-    res.status(500).json({ message: 'Failed to retrieve users' });
+    res.status(500).json({ message:'Failed to retrieve users'});
   }
 })
 
@@ -172,7 +170,7 @@ app.post('/sendMessage', async (req, res) => {
   const { sender, receiver, message,  } = req.body.data;
 
   if (!sender || !receiver || !message ) {
-    return res.status(400).json({ message: 'All fields are required.' });
+    return res.status(400).json({ message:'All fields are required.'});
   }
 
   try {

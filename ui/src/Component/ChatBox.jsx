@@ -10,7 +10,6 @@ import styled from "styled-components";
 const ChatBoxContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
   background-color: #fff;
   border-left: 1px solid #ccc;
   width: 80%;
@@ -113,6 +112,8 @@ const ChatBox = ({ selectedProfileId,selectedProfilename}) => {
     const login_singupId = params.get("_id");
     const { messages } = useSelector((state) => state.reduxStore);
 
+    const url="http://localhost:3032"
+
     useEffect(() => {
         const generateRoomId = (id1, id2) => {
             return [id1, id2].sort().join("_");
@@ -123,7 +124,7 @@ const ChatBox = ({ selectedProfileId,selectedProfilename}) => {
         if (login_singupId && selectedProfileId) {
             dispatch(fetchMessages(login_singupId, selectedProfileId));
         }
-        const newSocket = io("http://https://chatting-app-sooty.vercel.app");
+        const newSocket = io(`${url}`);
         setSocket(newSocket);
     
         const handleReceiveMessage = (data) => {
@@ -185,7 +186,7 @@ const ChatBox = ({ selectedProfileId,selectedProfilename}) => {
                 <AddUser />
             </ChatHeader>
             <ChatContent>
-                <MessageContainer>
+                <MessageContainer style={{height:'52vh'}}>
                     {sortedMessages.map((msg, index) => (
                         <MessageBubble key={index} isSender={msg.sender === login_singupId}>
                             <MessageContent>

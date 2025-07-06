@@ -7,10 +7,9 @@ body{
   margin: 9px;
   border: 0.3px solid aliceblue;
   border-radius: 8px;
-  background-color: aliceblue;
   flex-direction: row;
   display: flex;
-  min-height: 100vh;
+  height: 100%;
 }
 .sidNavediv {
   display: flex;

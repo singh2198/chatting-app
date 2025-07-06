@@ -100,6 +100,7 @@ function AddUser() {
   const name = params.get('name');
   const email = params.get('email');
   const singupobject_id=params.get('_id');
+  const url = "http://localhost:3032"
 
   useEffect(() => {
     fetchUsers();
@@ -107,7 +108,7 @@ function AddUser() {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch('http://https://chatting-app-sooty.vercel.app/getsingupuser');
+      const response = await fetch(`${url}/getsingupuser`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -126,7 +127,7 @@ function AddUser() {
 
   const handleAddUsers = async (selectedUserIds) => {
     try {
-      const response = await axios.post('http://https://chatting-app-sooty.vercel.app/addUserToMap', {
+      const response = await axios.post(`${url}/addUserToMap`, {
         loginUserId: singup_id, 
         addUserId: selectedUserIds,
         singupobject_id: singupobject_id 

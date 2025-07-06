@@ -8,6 +8,7 @@ const Register = () => {
     const [userId, setUserId] = useState(null);
     const navigate = useNavigate();
     const userObject=[];
+    const url=""
 
     
     const generateRandomId = () => Math.floor(Math.random() * 100000);
@@ -27,7 +28,7 @@ const Register = () => {
         }
 
         try{
-            const response=await fetch('http://https://chatting-app-sooty.vercel.app/Register',{
+            const response= await fetch(`${url}/Register`,{
                 method:"POST",
                 headers:{
                     'Content-Type': 'application/json',
@@ -76,7 +77,7 @@ const styles = {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        minHeight: "100vh",
+        height:'100%',
         backgroundColor: "#f4f6f8",
         fontFamily: "Arial, sans-serif",
     },
