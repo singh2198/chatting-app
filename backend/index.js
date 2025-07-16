@@ -9,25 +9,25 @@ const { ObjectId } = mongoose.Types;
 
 // Fix port configuration
 // const port = 3032;
-const port = process.env.PORT || 3032;
-const cors = require('cors');
-const { generateToken, verifyToken } = require('./auth');
+let port = process.env.PORT 
+let cors = require('cors');
+let { generateToken, verifyToken } = require('./auth');
 
-const app = express();
-const server = http.createServer(app);
+let app = express();
+let server = http.createServer(app);
 
 app.use(cors({
-  // origin: "http://localhost:3000",
-  origin: process.env.VERCAL_UI_URL,
+
+  origin: [process.env.VERCAL_UI_URL,"http://localhost:3000"] ,
   methods: ['GET', 'POST','DELETE','PUT'],
   allowedHeaders: ['Content-Type'],
 }));
 // const io=new Server(server);
 app.use(express.json());
-const io = new Server(server, {
+let io = new Server(server, {
   cors: {
-    // origin: 'http://localhost:3000',  
-    origin: process.env.VERCAL_UI_URL,
+
+    origin: [process.env.VERCAL_UI_URL , 'http://localhost:3000'],
     methods: ['GET', 'POST','DELETE','PUT'],
   },
 });

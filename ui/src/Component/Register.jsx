@@ -9,7 +9,7 @@ const Register = () => {
     const navigate = useNavigate();
     const userObject=[];
     // const url=""
-    const url = process.env.REACT_APP_BACKEND_URL || "http://localhost:3032"
+    let  url = process.env.REACT_APP_BACKEND_URL
 
     
     const generateRandomId = () => Math.floor(Math.random() * 100000);
