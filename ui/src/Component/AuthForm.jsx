@@ -99,9 +99,10 @@ function AuthForm() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   // let  url ="http://localhost:3032"
-  let url = process.env.REACT_APP_BACKEND_URL 
+ 
 
   const handleAuth = async (e) => {
+    let url = process.env.REACT_APP_BACKEND_URL 
     e.preventDefault();
   
     
