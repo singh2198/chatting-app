@@ -112,7 +112,7 @@ function AddUser() {
   
   const fetchUsers = async () => {
     try {
-      const response = await fetch(`${url}/getsingupuser`);
+      const response = await fetch(`${url}getsingupuser`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -131,7 +131,7 @@ function AddUser() {
 
   const handleAddUsers = async (selectedUserIds) => {
     try {
-      const response = await axios.post(`${url}/addUserToMap`, {
+      const response = await axios.post(`${url}addUserToMap`, {
         loginUserId: singup_id, 
         addUserId: selectedUserIds,
         singupobject_id: singupobject_id 

@@ -9,7 +9,7 @@ const { ObjectId } = mongoose.Types;
 
 // Fix port configuration
 // const port = 3032;
-let port = process.env.PORT 
+let port = process.env.PORT  || 3032;
 let cors = require('cors');
 let { generateToken, verifyToken } = require('./auth');
 

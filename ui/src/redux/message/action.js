@@ -18,7 +18,7 @@ const url = process.env.REACT_APP_BACKEND_URL
 export const fetchMessages = (sender, receiver) => async (dispatch) => {
 
     try {
-      const response = await axios.post(`${url}/messages`,{
+      const response = await axios.post(`${url}messages`,{
         sender,
         receiver
       });
@@ -31,7 +31,7 @@ export const fetchMessages = (sender, receiver) => async (dispatch) => {
 
   export const sendMessageTodb=(data)=>async(dispatch)=>{
     try{
-      const response =await axios.post(`${url}/sendMessage`,{
+      const response =await axios.post(`${url}sendMessage`,{
        data
       });
       dispatch({type:MESSAGE_SUCCESS_SEND_TO_REDUX,payload:response.data})
@@ -50,7 +50,7 @@ export const fetchMessages = (sender, receiver) => async (dispatch) => {
   export const getMessageForSenderReceiver=(userId,chatPartnerId)=>async(dispatch)=>{
     try{
       
-      const response =await axios.get(`${url}/getmessage`,{
+      const response =await axios.get(`${url}getmessage`,{
         params: { userId, chatPartnerId },
       })
       if(response.data){
