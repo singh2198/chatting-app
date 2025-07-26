@@ -52,8 +52,10 @@ const SideProfile = () => {
     const [selectedProfilename, setSelectedProfilename] = useState([]);
     const dispatch = useDispatch();
     // Backend url
-    // const url='http://localhost:3032';
-    let url =  process.env.REACT_APP_BACKEND_URL 
+   
+    // let url =  'http://localhost:3032';
+    let url = process.env.REACT_APP_BACKEND_URL || "https://chatting-app-pphg.onrender.com/";
+
     
     const location =useLocation();
     const params = new URLSearchParams(location.search);

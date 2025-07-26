@@ -100,8 +100,8 @@ function AddUser() {
   const name = params.get('name');
   const email = params.get('email');
   const singupobject_id=params.get('_id');
-  // const url = "http://localhost:3032"
-  let  url = process.env.REACT_APP_BACKEND_URL 
+  // let url = "http://localhost:3032"
+  let  url = process.env.REACT_APP_BACKEND_URL || "https://chatting-app-pphg.onrender.com/"
   
 
   useEffect(() => {

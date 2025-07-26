@@ -113,7 +113,8 @@ const ChatBox = ({ selectedProfileId,selectedProfilename}) => {
     const { messages } = useSelector((state) => state.reduxStore);
 
     // const url="http://localhost:3032"
-    let url = process.env.REACT_APP_BACKEND_URL ||  "http://localhost:3032"
+    
+    let url = process.env.REACT_APP_BACKEND_URL || "https://chatting-app-pphg.onrender.com/";
 
     useEffect(() => {
         const generateRoomId = (id1, id2) => {

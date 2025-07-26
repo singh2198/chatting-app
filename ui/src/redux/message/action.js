@@ -11,7 +11,9 @@ import {
 
 } from "./actiontype";
 
-const url = process.env.REACT_APP_BACKEND_URL 
+// let url = 'http://localhost:3032';
+let url = process.env.REACT_APP_BACKEND_URL || "https://chatting-app-pphg.onrender.com/";
+
 
 
 
