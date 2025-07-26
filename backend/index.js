@@ -18,7 +18,7 @@ let server = http.createServer(app);
 
 app.use(cors({
 
-  origin: ["http://localhost:3000"] ,
+  origin: ["https://jumba-chating.vercel.app" ,"http://localhost:3000"] ,
   methods: ['GET', 'POST','DELETE','PUT'],
   allowedHeaders: ['Content-Type'],
 }));
@@ -27,7 +27,7 @@ app.use(express.json());
 let io = new Server(server, {
   cors: {
 
-    origin: [ 'http://localhost:3000'],
+    origin: [ 'https://jumba-chating.vercel.app','http://localhost:3000'],
     methods: ['GET', 'POST','DELETE','PUT'],
   },
 });
