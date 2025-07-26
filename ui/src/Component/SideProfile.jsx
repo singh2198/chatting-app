@@ -54,7 +54,7 @@ const SideProfile = () => {
     // Backend url
    
     // let url =  'http://localhost:3032';
-    let url = process.env.REACT_APP_BACKEND_URL || "https://chatting-app-pphg.onrender.com";
+    let url = process.env.REACT_APP_BACKEND_URL || "https://chatting-app-pphg.onrender.com/";
 
     
     const location =useLocation();
@@ -65,7 +65,8 @@ const SideProfile = () => {
 
     const fetchProfiles = async () => {
         try {
-            const response = await axios.post(`${url}/getmappedusers`,{singup_id}); 
+          console.log(process.env.REACT_APP_BACKEND_URL);
+            const response = await axios.post(`${url}getmappedusers`,{singup_id}); 
             console.log("response",response);
             if (response.data) {
                 const data = await response.data
