@@ -102,6 +102,7 @@ const SideProfile = () => {
         } catch (error) {
           console.error("Error in getting message from server:", error);
         }
+        
       };
       
 
