@@ -19,7 +19,8 @@ const signupSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     singup_id: { type: String, required: true, unique: true, default: () => uuidv4() },
-    map_id: { type: [String], required: false } 
+    map_id: { type: [String], required: false },
+    profile:{type:String,required:false} 
  
     
 });

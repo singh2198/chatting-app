@@ -277,6 +277,42 @@ app.get('/profile', verifyToken, async (req, res) => {
 });
 
 
+// post call to update profile detail of user 
+
+app.put('/updateProfile',async (req,res)=>{
+  debugger;
+  console.log("Update profile request body:", req.body);
+  const {name, image, singupobject_id} = req.body;
+  
+  if (!singupobject_id) {
+    return res.status(400).json({ message: 'singupobject_id is required' });
+  }
+  
+  try{
+    const updateData = {};
+    if (name) updateData.name = name;
+    if (image) updateData.profile = image; // Changed from image to profile to match schema
+    
+    const user = await Singup.findByIdAndUpdate(
+      singupobject_id, 
+      updateData,
+      { new: true }
+    );
+    
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    
+    return res.status(200).json({message:"Profile updated successfully", response:user});
+
+  }
+  catch(error){
+    console.log("Error in updating profile", error);
+    return res.status(500).json({ message: 'Error in updating profile'});
+  }
+});
+
+
 
 
 io.on('connection', (socket) => {
