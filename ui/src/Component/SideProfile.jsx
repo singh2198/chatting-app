@@ -60,13 +60,13 @@ const SideProfile = () => {
     const location =useLocation();
     const params = new URLSearchParams(location.search);
     const singup_id = params.get('singup_id');
-    const singupObject_id=params.get('_id')
+    const singupObject_id=params.get('_id');
 
 
     const fetchProfiles = async () => {
         try {
           console.log(process.env.REACT_APP_BACKEND_URL);
-            const response = await axios.post(`${url}getmappedusers`,{singup_id}); 
+            const response = await axios.post(`${url}/getmappedusers`,{singup_id}); 
             console.log("response",response);
             if (response.data) {
                 const data = await response.data

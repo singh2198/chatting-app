@@ -4,7 +4,9 @@ import {
    ADD_MESSAGE,
    ONCLICK_DATA_SAVE_TO_REDUX,
    SET_CHAT_MESSAGE,DELETE_MESSAGE_SUCCESS,
-   MESSAGE_SUCCESS_SEND_TO_REDUX} from "./actiontype";
+   MESSAGE_SUCCESS_SEND_TO_REDUX,
+   UPDATE_PROFILE
+  } from "./actiontype";
 
 
 const initialState = {
@@ -13,6 +15,7 @@ const initialState = {
     messages: [], 
     isLoading: false, 
     isError: false, 
+    profileImage:null
   };
 
   
@@ -25,7 +28,7 @@ const initialState = {
           sender:payload[0]?.sender ?  payload[0].sender : [],
           receiver:payload[0]?.receiver ? payload[0].receiver : [],
           messages:payload ? payload : [],
-        }
+        };
         
       case MESSAGE_LOADING:
         return {
@@ -55,17 +58,24 @@ const initialState = {
           messages: state.messages.filter((msg) => msg.timestamp !== payload),
       };
 
-        case ONCLICK_DATA_SAVE_TO_REDUX:
+      case ONCLICK_DATA_SAVE_TO_REDUX:
           return {
             ...state,
             receiver:payload,
-          }
+          };
   
       case ADD_MESSAGE:
         return {
           ...state,
           messages: [...state.messages, payload], 
         };
+
+      case UPDATE_PROFILE:
+        return {
+          ...state,
+          profileImage:payload
+        };
+
   
       default:
         return state;

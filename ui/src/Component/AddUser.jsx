@@ -4,6 +4,8 @@ import { Select as ChakraReactSelect } from 'chakra-react-select';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
+import { Image } from "@chakra-ui/react";
+import EditProfileDialog from './EditProfileDialog';
 
 const AddUserContainer = styled.div`
   display: flex;
@@ -93,6 +95,7 @@ function AddUser() {
   const [users, setUsers] = useState([]); 
   const [selectedUsers, setSelectedUsers] = useState([]); 
   const [flag, setFlag] = useState(false);
+  const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
   const location = useLocation();
   const params = new URLSearchParams(location.search);
 
@@ -112,7 +115,7 @@ function AddUser() {
   
   const fetchUsers = async () => {
     try {
-      const response = await fetch(`${url}getsingupuser`);
+      const response = await fetch(`${url}/getsingupuser`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -152,10 +155,23 @@ function AddUser() {
     console.log("happen")
   }
 
+  const oneditProfile=()=>{
+    setIsEditProfileOpen(true);
+  }
+
   return (
     <ChakraProvider>
       <AddUserContainer>
-        <WelcomeText>Welcome, {name || 'User'}!</WelcomeText>
+      <Image
+          src="https://bit.ly/naruto-sage"
+          boxSize="50px"
+          borderRadius="full"
+          fit="cover"
+          alt="Naruto Uzumaki"
+          onClick={oneditProfile}
+          _hover={{cursor:'pointer'}}
+        />
+        <WelcomeText> {name || 'User'}</WelcomeText>
         <AddButton onClick={onClickImage}>
           <AddIcon src="/assets/plus.png" alt="Add Users" />
         </AddButton>
@@ -190,6 +206,12 @@ function AddUser() {
           </SubmitButton>
         </UserSelectContainer>
       )}
+
+      <EditProfileDialog
+        isOpen={isEditProfileOpen}
+        onClose={() => setIsEditProfileOpen(false)}
+        user={{ name, email, avatar: undefined ,singupobject_id}}
+      />
     </ChakraProvider>
   );
 }

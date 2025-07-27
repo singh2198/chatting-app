@@ -7,7 +7,8 @@ import {
   ERROR_IN_GETTING_MESSAGE,
   SUCCESSFULLY_MESSAGE_GET,
   DELETE_MESSAGE_SUCCESS,
-  ERROR_IN_SENDING_MESSAGE_TO_REDUX
+  ERROR_IN_SENDING_MESSAGE_TO_REDUX,
+  UPDATE_PROFILE
 
 } from "./actiontype";
 
@@ -20,7 +21,7 @@ let url = process.env.REACT_APP_BACKEND_URL || "https://chatting-app-pphg.onrend
 export const fetchMessages = (sender, receiver) => async (dispatch) => {
 
     try {
-      const response = await axios.post(`${url}messages`,{
+      const response = await axios.post(`${url}/messages`,{
         sender,
         receiver
       });
@@ -33,7 +34,7 @@ export const fetchMessages = (sender, receiver) => async (dispatch) => {
 
   export const sendMessageTodb=(data)=>async(dispatch)=>{
     try{
-      const response =await axios.post(`${url}sendMessage`,{
+      const response =await axios.post(`${url}/sendMessage`,{
        data
       });
       dispatch({type:MESSAGE_SUCCESS_SEND_TO_REDUX,payload:response.data})
@@ -52,7 +53,7 @@ export const fetchMessages = (sender, receiver) => async (dispatch) => {
   export const getMessageForSenderReceiver=(userId,chatPartnerId)=>async(dispatch)=>{
     try{
       
-      const response =await axios.get(`${url}getmessage`,{
+      const response =await axios.get(`${url}/getmessage`,{
         params: { userId, chatPartnerId },
       })
       if(response.data){
@@ -81,6 +82,20 @@ export const deleteMessage = (timestamp) => async (dispatch) => {
       console.error("Error deleting message:", error);
   }
 };
+
+export const updateProfile= (payload)=> async (dispatch)=>{
+  
+  try{
+    const response =await axios.put(`${url}/updateProfile`, payload)
+
+    if(response){
+      dispatch({type:UPDATE_PROFILE,payload:response.data})
+    }
+  }
+  catch(error){
+    console.error("Failed to update profile", error);
+  }
+}
 
 
 
