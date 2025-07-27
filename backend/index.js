@@ -282,8 +282,8 @@ app.get('/profile', verifyToken, async (req, res) => {
 
 app.put('/updateProfile',upload.single('image'), async (req,res)=>{
   debugger;
-  console.log("Update profile request body:", req.body);
-  const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
+  console.log("Update profile request body:", req);
+  const imagePath = req.body.image ? `/uploads/${req.body.image.filename}` : null;
 
   const {name, image, singupobject_id} = req.body;
 

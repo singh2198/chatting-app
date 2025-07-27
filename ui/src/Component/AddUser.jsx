@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChakraProvider, Box, Button, Text } from '@chakra-ui/react';
 import { Select as ChakraReactSelect } from 'chakra-react-select';
+import {useSelector} from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -98,6 +99,7 @@ function AddUser() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
   const location = useLocation();
   const params = new URLSearchParams(location.search);
+  const { profileImage } = useSelector((state) => state.reduxStore);
 
   const singup_id = params.get('singup_id');
   const name = params.get('name');
@@ -109,7 +111,8 @@ function AddUser() {
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+    console.log("profileImage",profileImage);
+  }, [profileImage]);
 
 
   
@@ -163,7 +166,7 @@ function AddUser() {
     <ChakraProvider>
       <AddUserContainer>
       <Image
-          src="https://bit.ly/naruto-sage"
+          src={profileImage ? profileImage: ''}
           boxSize="50px"
           borderRadius="full"
           fit="cover"
