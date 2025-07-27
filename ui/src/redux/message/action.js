@@ -70,7 +70,7 @@ export const fetchMessages = (sender, receiver) => async (dispatch) => {
 
 export const deleteMessage = (timestamp) => async (dispatch) => {
   try {
-      const response = await axios.put(`${url}deletemessage`, {
+      const response = await axios.put(`${url}/deletemessage`, {
         timestamp
       });
       if (response.data.deletedMessage) {
