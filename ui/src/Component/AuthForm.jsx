@@ -115,7 +115,7 @@ function AuthForm() {
       return;
     }
   
-     url = isLogin ? `${url}/login` : `${url}/singup`;
+     url = isLogin ? `${url}login` : `${url}singup`;
     const data = isLogin ? { email, password } : { name, email, password };
   
     try {
