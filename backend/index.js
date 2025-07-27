@@ -1,23 +1,25 @@
-const express = require('express');
-const http = require('http');
-const { Server } = require('socket.io');
-const connectDB = require('./db'); 
-const { User, Singup ,Msg} = require('./user');
-const bcrypt = require('bcrypt');
-const mongoose = require('mongoose');
+import express from 'express';
+import http from 'http';
+import { Server } from 'socket.io';
+import connectDB from './db.js';
+import { User, Singup, Msg } from './user.js';
+import bcrypt from 'bcrypt';
+import mongoose from 'mongoose';
 const { ObjectId } = mongoose.Types;
+import upload from './middleware/middleware.js';
+import cors from 'cors';
+import { generateToken, verifyToken } from './auth.js';
+
+// ranzo
 
 // Fix port configuration
 // const port = 3032;
 let port = process.env.PORT  || 3032;
-let cors = require('cors');
-let { generateToken, verifyToken } = require('./auth');
 
 let app = express();
 let server = http.createServer(app);
 
 app.use(cors({
-
   origin: ["https://jumba-chating.vercel.app" ,"http://localhost:3000"] ,
   methods: ['GET', 'POST','DELETE','PUT'],
   allowedHeaders: ['Content-Type'],
@@ -26,7 +28,6 @@ app.use(cors({
 app.use(express.json());
 let io = new Server(server, {
   cors: {
-
     origin: [ 'https://jumba-chating.vercel.app','http://localhost:3000'],
     methods: ['GET', 'POST','DELETE','PUT'],
   },
@@ -142,7 +143,7 @@ app.get('/getsingupuser',async(req,res)=>{
 
 
 app.post('/getmappedusers', async (req, res) => {
-  const { singup_id } = req.body; 
+  const { singup_id } = req.body;
   if (!singup_id) {
     return res.status(400).json({ message: 'singup_id is required' });
   }
@@ -161,7 +162,7 @@ app.post('/getmappedusers', async (req, res) => {
 
 app.get('/getusers',async(req,res)=>{
   try {
-    const users = await User.find(); 
+    const users = await User.find();
     res.status(200).json(users);
   } catch (error) {
     console.error('Error fetching users:', error);
@@ -181,7 +182,7 @@ app.post('/sendMessage', async (req, res) => {
       sender,
       receiver,
       message,
-      
+
     });
 
     const savedMessage = await sendMessageUser.save();
@@ -205,8 +206,8 @@ app.get('/getmessage', async (req, res) => {
         { sender: userId, receiver: chatPartnerId },
         { sender: chatPartnerId, receiver: userId },
       ],
-    }).sort({ timestamp: 1 }); 
-    return res.status(200).json(messages); 
+    }).sort({ timestamp: 1 });
+    return res.status(200).json(messages);
   } catch (error) {
     console.error('Error fetching messages:', error);
     return res.status(500).json({ message: 'Error fetching messages.' });
@@ -223,7 +224,7 @@ app.put('/deletemessage', async (req, res) => {
   }
 
   try {
-    
+
     const result = await Msg.findOneAndDelete({ timestamp });
 
     if (!result) {
@@ -257,14 +258,14 @@ app.post('/login', async (req, res) => {
     }
     const token = generateToken(user);
       return res.status(200).json({
-        
-        message: 'login successful', 
+
+        message: 'login successful',
         singup_id: user.singup_id,
         name: user.name,
         email: user.email,
         _id:user._id,
         token });
-    
+
   } catch (error) {
     console.error('error during login:', error);
     res.status(500).json({ message: 'Server error' });
@@ -277,32 +278,34 @@ app.get('/profile', verifyToken, async (req, res) => {
 });
 
 
-// post call to update profile detail of user 
+// post call to update profile detail of user
 
-app.put('/updateProfile',async (req,res)=>{
+app.put('/updateProfile',upload.single('image'), async (req,res)=>{
   debugger;
   console.log("Update profile request body:", req.body);
+  const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
+
   const {name, image, singupobject_id} = req.body;
-  
+
   if (!singupobject_id) {
     return res.status(400).json({ message: 'singupobject_id is required' });
   }
-  
+
   try{
     const updateData = {};
     if (name) updateData.name = name;
-    if (image) updateData.profile = image; // Changed from image to profile to match schema
-    
+    if (image) updateData.profile = imagePath; // Changed from image to profile to match schema
+
     const user = await Singup.findByIdAndUpdate(
-      singupobject_id, 
+      singupobject_id,
       updateData,
       { new: true }
     );
-    
+
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    
+
     return res.status(200).json({message:"Profile updated successfully", response:user});
 
   }

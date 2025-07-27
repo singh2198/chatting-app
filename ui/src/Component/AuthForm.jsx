@@ -102,7 +102,7 @@ function AuthForm() {
  
 
   const handleAuth = async (e) => {
-    let url = process.env.REACT_APP_BACKEND_URL || "https://chatting-app-pphg.onrender.com/";
+    let url = process.env.REACT_APP_BACKEND_URL || "https://localhost:3032/";
     e.preventDefault();
   
     

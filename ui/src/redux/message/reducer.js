@@ -73,7 +73,7 @@ const initialState = {
       case UPDATE_PROFILE:
         return {
           ...state,
-          profileImage:payload
+          profileImage:payload.response.profile
         };
 
   

@@ -54,14 +54,24 @@ function EditProfileDialog({ isOpen, onClose, user, onSave}) {
     }
   };
 
+  // const handleSave = () => {
+  //   // if (onSave) onSave({ name, image });
+  //   const updateProfilepayload={
+  //     image:image?.name,
+  //     name,
+  //     singupobject_id:user?.singupobject_id,
+  //   }
+  //   dispatch(updateProfile(updateProfilepayload));
+  //   onClose();
+  // };
+
   const handleSave = () => {
-    // if (onSave) onSave({ name, image });
-    const updateProfilepayload={
-      image:image?.name,
-      name,
-      singupobject_id:user?.singupobject_id,
-    }
-    dispatch(updateProfile(updateProfilepayload));
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("singupobject_id", user?.singupobject_id);
+    formData.append("image", image); // this should be a File object (from input)
+  
+    dispatch(updateProfile(formData)); // pass the FormData to your Redux action
     onClose();
   };
 

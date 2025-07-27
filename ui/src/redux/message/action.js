@@ -13,7 +13,7 @@ import {
 } from "./actiontype";
 
 // let url = 'http://localhost:3032';
-let url = process.env.REACT_APP_BACKEND_URL || "https://chatting-app-pphg.onrender.com/";
+let url = process.env.REACT_APP_BACKEND_URL || "https://localhost:3032/";
 
 
 
