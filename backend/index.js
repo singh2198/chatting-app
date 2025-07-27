@@ -294,7 +294,7 @@ app.put('/updateProfile',upload.single('image'), async (req,res)=>{
   try{
     const updateData = {};
     if (name) updateData.name = name;
-    if (image) updateData.profile = imagePath; // Changed from image to profile to match schema
+    if (imagePath) updateData.profile = imagePath; // Changed from image to profile to match schema
 
     const user = await Singup.findByIdAndUpdate(
       singupobject_id,

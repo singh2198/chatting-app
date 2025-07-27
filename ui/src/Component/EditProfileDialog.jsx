@@ -70,6 +70,8 @@ function EditProfileDialog({ isOpen, onClose, user, onSave}) {
     formData.append("name", name);
     formData.append("singupobject_id", user?.singupobject_id);
     formData.append("image", image); // this should be a File object (from input)
+    console.log("formdata",formData);
+    
   
     dispatch(updateProfile(formData)); // pass the FormData to your Redux action
     onClose();
