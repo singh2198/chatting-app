@@ -113,7 +113,7 @@ function AddUser() {
     fetchUsers();
     console.log("profileImage",profileImage);
 
-    
+
   }, [profileImage]);
 
 
@@ -140,7 +140,7 @@ function AddUser() {
 
   const handleAddUsers = async (selectedUserIds) => {
     try {
-      const response = await axios.post(`${url}addUserToMap`, {
+      const response = await axios.post(`${url}/addUserToMap`, {
         loginUserId: singup_id, 
         addUserId: selectedUserIds,
         singupobject_id: singupobject_id 
