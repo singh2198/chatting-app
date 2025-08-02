@@ -300,9 +300,9 @@ app.use((error, req, res, next) => {
 
 // post call to update profile detail of user
 app.put('/updateProfile',upload.single('image'), async (req,res)=>{
-  debugger;
   console.log("Update profile request body:", req.body);
   console.log("Uploaded file:", req.file);
+  console.log("Request headers:", req.headers);
   
   // Check if file was uploaded
   const imagePath = req.file ? `/uploads/${req.file.filename}` : null;

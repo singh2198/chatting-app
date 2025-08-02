@@ -83,7 +83,11 @@ export const deleteMessage = (timestamp) => async (dispatch) => {
 export const updateProfile= (payload)=> async (dispatch)=>{
   
   try{
-    const response =await axios.put(`${url}/updateProfile`, payload)
+    const response =await axios.put(`${url}/updateProfile`, payload, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
 
     if(response){
       dispatch({type:UPDATE_PROFILE,payload:response.data})
