@@ -7,6 +7,7 @@ import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
 const { ObjectId } = mongoose.Types;
 import upload from './middleware/middleware.js';
+import multer from 'multer';
 import cors from 'cors';
 import { generateToken, verifyToken } from './auth.js';
 
@@ -26,6 +27,9 @@ app.use(cors({
 }));
 // const io=new Server(server);
 app.use(express.json());
+
+
+
 let io = new Server(server, {
   cors: {
     origin: [ 'https://jumba-chating.vercel.app','http://localhost:3000'],
@@ -278,14 +282,32 @@ app.get('/profile', verifyToken, async (req, res) => {
 });
 
 
-// post call to update profile detail of user
+// Serve static files from uploads directory
+app.use('/uploads', express.static('uploads'));
 
+// Error handling middleware for multer
+app.use((error, req, res, next) => {
+  if (error instanceof multer.MulterError) {
+    console.log('Multer error:', error);
+    return res.status(400).json({ message: 'File upload error: ' + error.message });
+  } else if (error) {
+    console.log('Other error:', error);
+    return res.status(500).json({ message: 'Server error: ' + error.message });
+  }
+  next();
+});
+
+
+// post call to update profile detail of user
 app.put('/updateProfile',upload.single('image'), async (req,res)=>{
   debugger;
-  console.log("Update profile request body:", req);
-  const imagePath = req.body.image ? `/uploads/${req.body.image.filename}` : null;
+  console.log("Update profile request body:", req.body);
+  console.log("Uploaded file:", req.file);
+  
+  // Check if file was uploaded
+  const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
 
-  const {name, image, singupobject_id} = req.body;
+  const {name, singupobject_id} = req.body;
 
   if (!singupobject_id) {
     return res.status(400).json({ message: 'singupobject_id is required' });
