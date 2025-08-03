@@ -169,7 +169,7 @@ function AddUser() {
     <ChakraProvider>
       <AddUserContainer>
       <Image
-          src={profileImage ? profileImage: ''}
+          src={profileImage ? `${url}${profileImage}` : ''}
           boxSize="50px"
           borderRadius="full"
           fit="cover"

@@ -8,7 +8,9 @@ import {
   SUCCESSFULLY_MESSAGE_GET,
   DELETE_MESSAGE_SUCCESS,
   ERROR_IN_SENDING_MESSAGE_TO_REDUX,
-  UPDATE_PROFILE
+  UPDATE_PROFILE,
+  LOGIN_USER,
+  FAILED_TO_LOGIN
 
 } from "./actiontype";
 
@@ -97,6 +99,32 @@ export const updateProfile= (payload)=> async (dispatch)=>{
     console.error("Failed to update profile", error);
   }
 }
+
+
+export const loginUser= (payload, navigate) =>async(dispatch)=>{
+  try{
+    const response =await axios.post(`${url}/login`,payload,{
+      headers: { 'Content-Type': 'application/json' }
+    })
+    if(response.data.message){
+      const { singup_id, name, email ,_id} = response.data;
+      dispatch({type:LOGIN_USER,payload:response.data})
+      navigate(`/chat?singup_id=${encodeURIComponent(singup_id)}&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&_id=${encodeURIComponent(_id)}`);
+    }
+
+  }
+  catch(error){
+    dispatch({type:FAILED_TO_LOGIN, payload: error.response?.data?.message || 'Login failed'})
+    console.error("Failed to login", error);
+  }
+
+}
+
+
+
+  
+   
+   
 
 
 

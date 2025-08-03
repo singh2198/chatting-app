@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import {loginUser} from '../redux/message/action';
+import {useDispatch} from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const AuthFormContainer = styled.div`
   max-width: 400px;
@@ -98,6 +101,8 @@ function AuthForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   // let  url ="http://localhost:3032"
  
 
@@ -119,15 +124,8 @@ function AuthForm() {
     const data = isLogin ? { email, password } : { name, email, password };
   
     try {
-      const response = await axios.post(url, data, {
-        headers: { 'Content-Type': 'application/json' }
-      });
-      console.log("response",response);
-      if (response.data.message) {
-      const { singup_id, name, email ,_id} = response.data;
-      window.location.href = `/chat?singup_id=${encodeURIComponent(singup_id)}&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&_id=${encodeURIComponent(_id)}`;
-
-      }
+      // Pass navigate function to loginUser action
+      dispatch(loginUser(data, navigate));
     } catch (error) {
       const errorMessage = error.response?.data?.message || `Error during ${isLogin ? 'login' : 'registration'}`;
       alert(errorMessage);

@@ -252,7 +252,7 @@ app.post('/login', async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await Singup.findOne({ email });
-    console.log("user",user);
+    
     if (!user) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
@@ -264,10 +264,11 @@ app.post('/login', async (req, res) => {
       return res.status(200).json({
 
         message: 'login successful',
-        singup_id: user.singup_id,
-        name: user.name,
-        email: user.email,
-        _id:user._id,
+        singup_id: user?.singup_id,
+        name: user?.name,
+        email: user?.email,
+        _id:user?._id,
+        profile:user?.profile,
         token });
 
   } catch (error) {

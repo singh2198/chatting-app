@@ -20,9 +20,18 @@ const signupSchema = new mongoose.Schema({
     password: { type: String, required: true },
     singup_id: { type: String, required: true, unique: true, default: () => uuidv4() },
     map_id: { type: [String], required: false },
-    profile:{type:String,required:false} 
- 
-    
+    profile: { 
+        type: String, 
+        required: false,
+        default: null,
+        validate: {
+            validator: function(v) {
+                // Allow null/undefined or a valid file path
+                return v === null || v === undefined || (typeof v === 'string' && v.length > 0);
+            },
+            message: 'Profile must be a valid file path string or null'
+        }
+    }
 });
 
 const messageSchema = new mongoose.Schema({

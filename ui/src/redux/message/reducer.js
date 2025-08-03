@@ -5,7 +5,9 @@ import {
    ONCLICK_DATA_SAVE_TO_REDUX,
    SET_CHAT_MESSAGE,DELETE_MESSAGE_SUCCESS,
    MESSAGE_SUCCESS_SEND_TO_REDUX,
-   UPDATE_PROFILE
+   UPDATE_PROFILE,
+   FAILED_TO_LOGIN,
+   LOGIN_USER
   } from "./actiontype";
 
 
@@ -15,7 +17,8 @@ const initialState = {
     messages: [], 
     isLoading: false, 
     isError: false, 
-    profileImage:null
+    profileImage:null,
+    login:null
   };
 
   
@@ -75,6 +78,19 @@ const initialState = {
           ...state,
           profileImage:payload.response.profile
         };
+      
+      case LOGIN_USER:
+        return {
+          ...state,
+          login:payload
+        }
+
+      case FAILED_TO_LOGIN:
+        return {
+          ...state,
+          login: null,
+          isError: true
+        }
 
   
       default:
